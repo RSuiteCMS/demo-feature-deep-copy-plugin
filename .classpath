@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="java/lib/rsuite-api.jar" sourcepath="/rsuite-core"/>
+	<classpathentry kind="lib" path="java/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="java/lib/commons-io.jar"/>
+	<classpathentry kind="lib" path="java/lib/jbpm.jar"/>
+	<classpathentry kind="lib" path="java/lib/team-edition-plugin-utilities.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

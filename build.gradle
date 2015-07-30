@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+apply from: 'http://ivy.reallysi.com/ivy-repo/rsuite-std-plugin-tasks.gradle'
+apply from: 'http://ivy.reallysi.com/ivy-repo/repositories-std-include.gradle'
+
+group = "rsi"
+project.buildDir = 'target'
+
+configurations {
+	includeInJar {
+		transitive = false
+	}
+}
+
+dependencies {
+	compile('rsi:team-edition-plugin-utilities:1.0-qa042') {
+		transitive = false
+	}
+	includeInJar "rsi:team-edition-plugin-utilities:1.0-qa042"
+
+	compile ('rsi:rsuite-api:4.1.0-qa19') {
+		transitive = false
+	}
+	compile 'rsi:rsi-utils:20100114'
+	compile 'apache:commons-logging:1.1'
+	compile 'apache:commons-io:1.4'
+	compile 'jboss:jbpm:rsuite-20090317'
+	compile 'jcraft:jsch:0.1.45'
+	
+	configurations.compile.extendsFrom(configurations.includeInJar)
+}
+
+jar () {
+	baseName='demo-feature-deep-copy-plugin'
+	from configurations.includeInJar
+}

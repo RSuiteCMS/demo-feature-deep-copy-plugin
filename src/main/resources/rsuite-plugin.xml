@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rsuite-plugin id="demo-feature-deep-copy" version="@pluginVersion@ at @timeStamp@">
+
+    <extensionProvider id="rsuite.WebService">
+        <staticWebService path="/WebContent" root="/demo-feature-deep-copy"/>
+        <remoteApiDefinition description="Duplicate CA and its descendant CAs and MOs"
+            handler="com.rsicms.rsuite.demodeepcopy.webservice.DeepCopy" id="demo-feature-deep-copy:DeepCopy"/>
+    </extensionProvider>
+
+    <extensionProvider id="rsuite.UI">
+        <styleInclude src="/demo-feature-deep-copy/style.less"/>
+    </extensionProvider>
+
+    <extensionProvider id="rsuite.Forms">
+        <formDefinition description="Copy Container" id="form.deepCopy" label="Copy Container">
+            <instructions>Assignments and metadata will also be copied. A notification will appear when the copy is done.</instructions>
+            <column name="c1">
+                <param formControlType="text" label="New folder title" name="copyLabel">
+                    <validation required="true" errorMessage="Required"/>
+                </param>
+                <param formControlType="text" label="Filename suffix for copied content" name="copySuffix"/>
+                <param formControlType="text" label="Source Label" name="sourceLabel">
+                    <validation required="true" errorMessage="Required"/>
+                </param>
+            </column>
+            <column name="c2">
+                <param formControlType="radiobutton" label="Referenced content" name="copyContent">
+                    <validation required="true"/>
+                    <valueList>
+                        <value>dup</value>
+                    </valueList>
+                    <optionList>
+                        <option label="Duplicate referenced content" value="dup"/>
+                        <option label="Link to referenced content" value="reuse"/>
+                    </optionList>
+                </param>
+                <!--<param formControlType="radiobutton" label="Role assignments" name="copyAssignments">
+                    <validation required="true"/>
+                    <valueList>
+                        <value>dup</value>
+                    </valueList>
+                    <optionList>
+                        <option label="Keep project and user assignments" value="dup"/>
+                        <option label="Remove project and user assignments" value="reuse"/>
+                    </optionList>
+                </param>-->
+            </column>
+        </formDefinition>
+    </extensionProvider>
+
+    <extensionProvider id="rsuite.ContextMenu">
+        <contextMenuRuleSet name="deepcopy" scope="allNodes">
+            <menuItemList>
+                <menuItem id="demo:deepcopy">
+                    <actionName>rsuite:invokeWebservice</actionName>
+                    <label>Copy folder and contents...</label>
+                    <property name="rsuite:icon" value="duplicate"/>
+                    <property name="formId" value="form.deepCopy"/>
+                    <property name="timeout" value="0"/>
+                    <property name="remoteApiName" value="demo-feature-deep-copy:DeepCopy"/>
+                    <property name="rsuite:pathMessage" value="actions/path/organize"/>
+                </menuItem>
+            </menuItemList>
+            <ruleList>
+                <rule>include nodeType ca</rule>
+                <rule>exclude role Contributor</rule>
+            </ruleList>
+        </contextMenuRuleSet>
+    </extensionProvider>
+
+</rsuite-plugin>
