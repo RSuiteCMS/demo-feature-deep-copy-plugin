@@ -15,15 +15,15 @@ configurations {
 
 dependencies {
 	compile('rsi:team-edition-plugin-utilities:1.0-qa043') {
-        transitive = true
-    }
-    includeInJar "rsi:team-edition-plugin-utilities:1.0-qa043"
+		transitive = true
+	}
+	includeInJar "rsi:team-edition-plugin-utilities:1.0-qa043"
 
-    compile('rsi:rsuite-api:4.0.+') {
-        transitive=false
-    }
+	compile('rsi:rsuite-api:4.0.+') {
+		transitive=false
+	}
 	
-    compile 'rsi:rsi-utils:20100114'
+	compile 'rsi:rsi-utils:20100114'
 	compile 'apache:commons-logging:1.1'
 	compile 'apache:commons-io:1.4'
 	compile 'jboss:jbpm:rsuite-20090317'
